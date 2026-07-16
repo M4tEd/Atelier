@@ -1,0 +1,225 @@
+Cream of the Crop
+ArtStation Legends [2026-01-15] (3) [environments, lighting, photorealism]
+BlenderGuru [2025-11-20] [tutorials, environments, materials]
+CG Boost Collection [2026-05-06] (5.8GB+) [characters, stylized, texturing]
+Ducky3D [2026-02-02] (3) [shaders, lighting, procedural, style]
+FlippedNormals [2026-05-01] (3) [sculpting, topology, style]
+Gleb Alexandrov Collection [2026-05-29] (-1) [lighting, compositing, environments, materials, style]
+Grant Warwick [2026-06-15] (-2) [hard surface, modeling, rendering, topology, materials]
+Ian Hubert [2024-07-20] (9GB+) [environments, photorealism, compositing, style, vfx]
+Josh Gambrell Collection [2025-08-07] (2) [hard surface!, modeling, topology, materials]
+Ponte Ryuurui [2025-08-19] (2, look for older courses) [environments, lighting, photorealism, style, texturing]
+RedefineFX Collection [2025-11-29] (-1) [vfx, particles, simulations, lighting, style]
+SouthernShotty [2026-04-05] [characters, stylized, animation]
+Stylized Station Collection [2026-05-13] (1) [characters, stylized]
+The Pixel Lab Collection [2026-06-16] (2) [models, environments, materials, lighting, animation]
+Topology Guides [2026-06-07] (3) [topology, retopology, characters, style, top tier]
+Wingfox Collection [2026-04-19] (3) [characters, environments, lighting, materials, vfx]
+Yansculpts [2026-05-01] (3) [sculpting, characters, materials, lighting, style]
+Zach Reinhardt [2026-02-07] (1) [beginner friendly!, fundamentals!, blender, style, top tier]
+
+
+Bangers
+3D Exercises [2025-11-07] (2) [top tier quality]
+80 Level Collection [2024-10-16] (-2)
+Arrimus3D [https://www.youtube.com/@Arrimus3D]
+AskNK Collection [2025-01-21] (1) [tutorials, shaders, geometry nodes]
+Bad Normals [Jul 27, 2025]
+Blender Daily [2025-02-19] (2) [shaders, geometry nodes, lighting]
+CGDive Collection [2024-09-07] (1) [lighting, rendering]
+CGMatter Collection [2026-04-12] (3) [shaders, simulations, geometry nodes, style]
+Chocofur Collection [2024-10-18] (-1) [archviz, materials, lighting]
+Creative Shrimp Collection [2026-01-04] [lighting, characters]
+CrossMind Studio Collection [2024-10-31] (-1) [animation, rigging, style]
+Default Cube Collection [2026-01-01] [characters, environments, style]
+Derek Elliott [2025-01-08] [hard surface]
+Erindale Collection [2026-05-02] () [geometry nodes, procedural, lighting, style]
+FlyCat [2026-03-12] () [style]
+Gamedev.tv [2024-11-24] (-1) [beginner, environments, lighting]
+Heartbeast [2025-05-04] (-1)
+Imphenzia [2026-06-07] [low poly, style]
+Jayanam [2026-06-01] (2, 4+ GB) [sculpting, hard surface, animation, materials, style]
+Joey Carlino [2025-04-14] (-1) [shaders, geometry nodes, lighting]
+Joshua Autumn Collection [2025-01-08] (-1)
+Kaizen Tutorials [2023-01-03] [materials, lighting, style]
+Kevandram Collection [2025-02-28] (-1) [style, topology]
+Lightning Boy Studio [2025-07-01] [characters, stylized, lighting, materials, style]
+Martin Klekner Collection [2026-05-13] (2) [environments, lighting, compositing, materials, vfx]
+Max Hay Collection [2026-06-04] [lighting, environments, style]
+Midge Mantissa Sinnaeve Collection [2026-02-06] () [shaders, lighting, materials, style]
+Mr Sorbias [Sep 8, 2025]
+Nathan Duck Collection [2025-10-02] (-2) [style]
+Nicky Blender [2024-07-09] [environments, materials, lighting, style]
+Olav3D [2026-05-02] [environments, lighting, style]
+Polygon Runway Collection [2024-11-28] () [low poly]
+Procedural Worlds [2026-01-01] (-1)
+Ranttu [2026-03-06] (-1) [environments, materials, style]
+Remington Graphics Collection [2025-09-29] (1) [lighting, style, vfx]
+RenderBurger [2026-02-19] (-2) [environments, materials, style]
+Royal Skies [2025-05-05] (-2) [lighting]
+Ryan King Art Collection [2025-11-02] (-1) [environments, lighting, materials, style]
+Sardi Pax [2026-06-02] (didn't save since 66, get compressed) [environments, materials, lighting]
+SENSEI Collection [2025-08-29] [environments, materials]
+Sir Wade Neistadt Collection [2026-04-03] [animation, style]
+Sketchfab Picks [2026-05-04] (-1)
+Smeaf Collection [2024-10-31] [animation, rigging, style, vfx]
+SouthernShotty Tutorials [2026-04-07] (-2) [characters, stylized, animation]
+Surfaced Studio [2026-04-29] (1) [vfx, compositing, lighting, style]
+TutsByKai [2024-07-04] [shaders, geometry nodes, materials, lighting, style]
+Wayward Art Company [2026-05-08] (2) [environments, lighting, materials, style, vfx]
+Wolf and Crow [2025-10-10] (-1) [environments, lighting, style]
+YanSculpts Tutorials [2025-07-03] () [sculpting, lighting, materials, style]
+
+
+Unsavable Bangers
+Academic Phoenix Plus Collection [2026-01-18] (2)
+Art of Wei Collection [2024-11-04]
+BornCG Collection [2025-02-24]
+CG Geek Collection [2026-01-04] (-1)
+CGMasters [2024-05-26]
+CG Cookie Fundamentals [Vol. 1 - 3]
+Dikko [2025-11-19]
+Dylan Neill Collection [2025-04-04]
+FlippedNormals Sculpting [2026-05-02] (1)
+Giant Cow Film [2025-08-15] (retired)
+Grant Abbitt Collection [2025-12-23] (1)
+Hardy Fowler [2025-12-26]
+Level Pixel Level [2026-06-03] ()
+Mantissa Industries [2026-04-10] (needs marinating)
+Mikeycal Meyers [2025-01-15] (1)
+Pierrick Picaut [2025-07-25]
+Royal Skies Retired [2024-05-30]
+The Ducky 3D [2025-02-26]
+Texture Haven [2026-05-07] (1)
+
+
+Worth Revisiting
+3D Greenhorn [2026-06-01] (1, iff >2025)
+3D Modeling Hub [2025-08-13]
+3D Tudor [2025-01-03]
+7th Axis Tutorials [2026-06-06] (-1)
+Adrian Jensen [2026-04-13] (-1)
+Aidy Burrows Collection [2024-09-15]
+Alimayo Arango [2026-04-05]
+Allegorithmic Tutorials [2025-06-22]
+Allan McKay Collection (wait until new content)
+Andrew Price Early Work [2026-01-18] ()
+AnimaTrik [2026-05-06]
+Bartosz Styperek [2026-02-20] ()
+Ben Vanderhook [2025-09-01] (3)
+Blender Bob [2025-02-11] (-1)
+Blender Cloud Archive [2026-01-03]
+Blender Diplom [2026-05-24]
+Blender Foundation [2024-04-13]
+Blender Insight [2024-04-22]
+BornCG Advanced [2026-06-07] (-2)
+Brandon Jenkins [2024-04-15]
+CG Boost Early Tutorials [2025-01-19] (-2)
+CGDive Advanced [2023-08-17]
+CG Masters Advanced [2024-11-10]
+CGMatter Early [2026-04-04] (-1)
+Curtis Holt [2024-05-29]
+Darrin Lile [2025-03-29] (-2)
+Decoded [2025-04-01]
+Default Cube Early [2025-08-11] ()
+Derek Elliott Advanced [2025-06-07]
+Dikko Advanced [2025-02-19]
+Dylan Neill Advanced [2024-09-09]
+Dylan Productions [2025-05-25]
+Erindale Early [2025-09-28] (-1)
+FlippedNormals Early [2025-01-21]
+Gamedev.tv Advanced [2025-07-07]
+Gleb Alexandrov Early [2024-11-14]
+Grant Warwick Early [2025-10-19]
+Heartbeast Advanced [2025-02-02]
+Imphenzia Advanced [2024-09-22]
+Jayanam Early [2025-01-22]
+Joey Carlino Early [2024-11-26]
+Josh Gambrell Early [2024-12-22] (-1)
+Joshua Autumn Advanced [2026-02-14]
+Kaizen Advanced [2025-11-24]
+Kevandram Advanced [2026-06-09] (3)
+Lightning Boy Advanced [2025-03-08]
+Martin Klekner Early [2025-04-27]
+Max Hay Early [2025-08-07] (1)
+Midge Mantissa Early [2026-01-06]
+Mikeycal Advanced [2026-03-04]
+Nathan Duck Early [2024-11-28] (-1)
+Olav3D Advanced [2025-04-04] (-1)
+Polygon Runway Advanced [2026-04-11]
+Procedural Worlds Advanced [2025-12-31] (-1)
+Ranttu Advanced [2026-03-22]
+Remington Graphics Early
+RenderBurger Advanced [2024-11-28]
+Roland Hess [2025-10-19] (2)
+Royal Skies Early [2026-03-23] (-1)
+Ryan King Art Early [2025-05-06] ()
+Sardi Pax Advanced [2026-05-12]
+SENSEI Advanced [2024-07-17]
+Sir Wade Neistadt Early [2026-06-03] (2)
+Sketchfab Tutorials [2026-01-29]
+Smeaf Advanced [2024-10-13] (1)
+SouthernShotty Early [2026-03-19] (-1)
+Stylized Station Early [2026-05-20]
+Surfaced Studio Advanced [2026-03-21] (-2)
+TutsByKai Advanced [2026-01-27] (-1)
+Wayward Art Early [2025-02-04]
+Wolf and Crow Advanced [2024-07-20]
+YanSculpts Advanced [2025-11-19] (heavy files, download compressed) [materials, style]
+Zach Reinhardt Advanced [2026-04-22]
+
+
+Fell off
+3D Modeling Course [2026-04-02] ()
+3D Printing Nerd [2024-09-10] ()
+Blender 2.7 Tutorials [2026-06-09] () [rigging, simulations, lighting, vfx]
+CG Cookie Archive [2026-02-18] [materials]
+CGDive Retired [2026-05-24] () [environments]
+Darrin Lile Retired [2026-05-15] () [environments, rigging, materials, lighting, vfx]
+Giant Cow Retired [2026-05-02] (-1) [environments, materials, lighting]
+Hardy Fowler Retired [2026-06-13] [environments, lighting, materials]
+
+
+Boring
+3D Printing Professor
+Blender 2.6 Tutorials
+CG Cookie Free (trust, not worth)
+CG Geek Free
+CG Masters Free (trust)
+CGDive Free
+Dikko Free
+Erindale Free
+FlippedNormals Free
+Gamedev.tv Free
+Grant Abbitt Free (trust)
+Heartbeast Free
+Imphenzia Free
+Jayanam Free
+Josh Gambrell Free
+Kaizen Free
+Kevandram Free
+Lightning Boy Free
+Martin Klekner Free
+Max Hay Free
+Nathan Duck Free
+Olav3D Free
+Polygon Runway Free
+Procedural Worlds Free
+Ranttu Free
+Remington Graphics Free
+Royal Skies Free
+Ryan King Art Free
+Sardi Pax Free
+SENSEI Free
+Sir Wade Neistadt Free
+Sketchfab Free
+Smeaf Free
+SouthernShotty Free
+Stylized Station Free
+Surfaced Studio Free
+TutsByKai Free
+Wayward Art Free
+Wolf and Crow Free
+YanSculpts Free
+Zach Reinhardt Free
+
