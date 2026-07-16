@@ -84,7 +84,7 @@ class LogUpdateDialog(QDialog):
         self.setMinimumWidth(430)
         layout = QVBoxLayout(self)
         explanation = QLabel(
-            "Record the update date and your judgment. A good update is +1; a bad update is -1."
+            "Record the update date and your judgment. A good update is +1; a bad update is -1; a mid update is 0."
         )
         explanation.setWordWrap(True)
         explanation.setProperty("muted", True)
@@ -96,6 +96,7 @@ class LogUpdateDialog(QDialog):
         self.sentiment_combo = QComboBox()
         self.sentiment_combo.addItem("Good update (+1)", "good")
         self.sentiment_combo.addItem("Bad update (−1)", "bad")
+        self.sentiment_combo.addItem("Mid update (0)", "mid")
         self.reason_edit = QPlainTextEdit()
         self.reason_edit.setPlaceholderText("What changed? (optional)")
         self.reason_edit.setMaximumHeight(100)

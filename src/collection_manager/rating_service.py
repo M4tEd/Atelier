@@ -67,7 +67,7 @@ class RatingService:
         sentiment: str | bool,
         reason: str = "",
     ) -> PointEvent:
-        """Log an explicitly dated good (+1) or bad (-1) update."""
+        """Log an explicitly dated good (+1), bad (-1), or mid (0) update."""
 
         if update_date is None or not isinstance(update_date, date):
             raise RatingError("An explicit update date is required")
@@ -81,6 +81,7 @@ class RatingService:
             delta=delta,
             reason=reason.strip() or f"{label} update",
             kind=PointEventKind.UPDATE_VIBE,
+            allow_zero=True,
         )
         artist.last_updated = update_date
         self.session.flush()
@@ -825,7 +826,9 @@ class RatingService:
             return 1, "Good"
         if normalized in {"bad", "negative", "-", "-1"}:
             return -1, "Bad"
-        raise RatingError("sentiment must be good/+1 or bad/-1")
+        if normalized in {"mid", "neutral", "0"}:
+            return 0, "Mid"
+        raise RatingError("sentiment must be good/+1, bad/-1, or mid/0")
 
     @staticmethod
     def _suggestion_identity(suggestion: RuleSuggestion) -> tuple[int, str, bool, int]:
