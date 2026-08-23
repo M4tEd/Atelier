@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         self._selected_artist_id: int | None = None
         self._nav_items: dict[str, QListWidgetItem] = {}
 
-        self.setWindowTitle(f"Collection Manager — {self.library_dir.name}")
+        self.setWindowTitle(f"Atelier — {self.library_dir.name}")
         self.setMinimumSize(1050, 680)
         self.resize(1450, 850)
         self._build_actions()

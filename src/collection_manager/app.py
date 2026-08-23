@@ -14,8 +14,8 @@ from collection_manager.database import Database, database_path_for_library
 from collection_manager.ui.main_window import MainWindow
 from collection_manager.ui.styles import DARK_STYLESHEET
 
-APP_NAME = "Collection Manager"
-ORGANIZATION_NAME = "Collection Manager"
+APP_NAME = "Atelier"
+ORGANIZATION_NAME = "Atelier"
 
 
 def application_settings() -> QSettings:
@@ -47,7 +47,7 @@ def choose_library_directory(settings: QSettings, requested: Path | None = None)
         if candidate is None or not candidate.is_dir():
             selected = QFileDialog.getExistingDirectory(
                 None,
-                "Choose a Collection Manager library folder",
+                "Choose an Atelier library folder",
                 str(_default_library_directory()),
                 QFileDialog.Option.ShowDirsOnly,
             )
@@ -64,7 +64,7 @@ def choose_library_directory(settings: QSettings, requested: Path | None = None)
         QMessageBox.critical(
             None,
             "Library unavailable",
-            f"Collection Manager cannot write to this folder:\n{candidate}\n\n{exc}",
+            f"Atelier cannot write to this folder:\n{candidate}\n\n{exc}",
         )
         return None
 

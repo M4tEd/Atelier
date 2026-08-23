@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Atelier
+Comment=Local desktop catalog and rating manager for artist collections
+Exec=/home/edward/Code/Atelier/atelier.sh
+Icon=/home/edward/Code/Atelier/assets/atelier.svg
+Terminal=false
+Type=Application
+Categories=Office;Database;
+StartupWMClass=atelier
+Path=/home/edward/Code/Atelier
+Keywords=atelier;catalog;collection;manager;

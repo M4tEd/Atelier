@@ -27,6 +27,7 @@ dev = [
 build = ["nuitka==4.1.3", "ordered-set>=4.1", "zstandard>=0.23"]
 
 [project.scripts]
+atelier = "collection_manager.app:main"
 collection-manager = "collection_manager.app:main"
 
 [tool.hatch.build.targets.wheel]
