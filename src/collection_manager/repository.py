@@ -325,6 +325,27 @@ class ArtistRepository:
         self.session.flush()
         return artist.tag_names
 
+    def move_to_collection(
+        self, artist_id: int, target_collection: CollectionKind | str
+    ) -> Artist:
+        """Move an artist to the other catalog, preserving all metadata and history.
+
+        The artist keeps its identity (``id``) so point/tier ledgers travel with it.
+        The move fails with :class:`DuplicateArtistError` if the target collection
+        already contains the same canonical name.
+        """
+
+        target = self._collection_kind_value(target_collection)
+        artist = self.get(artist_id, include_deleted=True)
+        if artist.collection_kind == target:
+            raise ValueError("Artist is already in the target collection")
+        self._ensure_name_available(artist.name_key, target)
+        artist.collection_kind = target
+        self.session.flush()
+        return artist
+
+    move_artist = move_to_collection
+
     def trash(self, artist_id: int) -> Artist:
         artist = self.get(artist_id)
         artist.deleted_at = utc_now()

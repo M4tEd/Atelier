@@ -31,7 +31,13 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from collection_manager.constants import TIER_COLORS, HeavyStatus, SizeQualifier, Tier
+from collection_manager.constants import (
+    TIER_COLORS,
+    CollectionKind,
+    HeavyStatus,
+    SizeQualifier,
+    Tier,
+)
 from collection_manager.folder_scanner import ScanStatus, size_candidate_from_scan
 from collection_manager.ui.data import ArtistView
 from collection_manager.ui.folder_scan import FolderScanController
@@ -85,6 +91,7 @@ class ArtistDetailPanel(QFrame):
     restore_requested = Signal()
     permanent_delete_requested = Signal()
     resolve_shift_requested = Signal()
+    move_requested = Signal()
     folder_scan_started = Signal(int, str)
     folder_scan_progress = Signal(int, object)
     folder_scan_completed = Signal(int, object)
@@ -260,6 +267,8 @@ class ArtistDetailPanel(QFrame):
         self.adjust_points_button.clicked.connect(self.point_adjustment_requested)
         self.resolve_shift_button = QPushButton("Resolve tier shift…")
         self.resolve_shift_button.clicked.connect(self.resolve_shift_requested)
+        self.move_button = QPushButton("Move to Images")
+        self.move_button.clicked.connect(self.move_requested)
         self.trash_button = QPushButton("Move to Trash")
         self.trash_button.setProperty("danger", True)
         self.trash_button.clicked.connect(self.trash_requested)
@@ -272,9 +281,10 @@ class ArtistDetailPanel(QFrame):
         actions.addWidget(self.log_update_button, 1, 0)
         actions.addWidget(self.adjust_points_button, 1, 1)
         actions.addWidget(self.resolve_shift_button, 2, 0, 1, 2)
-        actions.addWidget(self.trash_button, 3, 0, 1, 2)
-        actions.addWidget(self.restore_button, 4, 0)
-        actions.addWidget(self.delete_button, 4, 1)
+        actions.addWidget(self.move_button, 3, 0, 1, 2)
+        actions.addWidget(self.trash_button, 4, 0, 1, 2)
+        actions.addWidget(self.restore_button, 5, 0)
+        actions.addWidget(self.delete_button, 5, 1)
         layout.addLayout(actions)
         layout.addStretch()
 
@@ -303,6 +313,7 @@ class ArtistDetailPanel(QFrame):
             self.log_update_button,
             self.adjust_points_button,
             self.resolve_shift_button,
+            self.move_button,
             self.trash_button,
             self.restore_button,
             self.delete_button,
@@ -356,6 +367,7 @@ class ArtistDetailPanel(QFrame):
             self.restore_button.hide()
             self.delete_button.hide()
             self.trash_button.show()
+            self.move_button.hide()
             self._set_folder_scan_busy(False)
             self._loading = False
             return
@@ -386,11 +398,18 @@ class ArtistDetailPanel(QFrame):
             self.adjust_points_button,
             self.resolve_shift_button,
             self.trash_button,
+            self.move_button,
         ):
             widget.setVisible(not is_trashed)
         self.resolve_shift_button.setVisible(not is_trashed and artist.needs_attention)
         self.restore_button.setVisible(is_trashed)
         self.delete_button.setVisible(is_trashed)
+        if not is_trashed:
+            target_label = (
+                "Images" if artist.collection_kind == CollectionKind.VIDEOS else "Videos"
+            )
+            self.move_button.setText(f"Move to {target_label}")
+            self.move_button.setToolTip(f"Move {artist.name} to the {target_label} collection")
         self.calculate_folder_size_button.setEnabled(not is_trashed)
         self.browse_folder_button.setEnabled(not is_trashed)
         self._set_folder_scan_busy(False)
