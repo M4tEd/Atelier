@@ -28,7 +28,7 @@ from PySide6.QtWidgets import (
 from collection_manager.constants import TIER_DESCENDING, CollectionKind, Tier
 from collection_manager.database import Database
 from collection_manager.rating_service import RatingService
-from collection_manager.repository import ArtistRepository
+from collection_manager.repository import ArtistRepository, DuplicateArtistError
 from collection_manager.ui.data import ArtistStore, ArtistView
 from collection_manager.ui.dialogs import (
     AddArtistDialog,
@@ -160,6 +160,7 @@ class MainWindow(QMainWindow):
         self.detail.log_update_requested.connect(self.log_update)
         self.detail.point_adjustment_requested.connect(self.adjust_points)
         self.detail.resolve_shift_requested.connect(self.resolve_tier_shift)
+        self.detail.move_requested.connect(self.move_artist)
         self.detail.trash_requested.connect(self.trash_artist)
         self.detail.restore_requested.connect(self.restore_artist)
         self.detail.permanent_delete_requested.connect(self.permanent_delete_artist)
@@ -630,6 +631,45 @@ class MainWindow(QMainWindow):
         self._last_rating_action_depth = 0
         self.reload()
         self.statusBar().showMessage("Latest rating action reversed", 4000)
+
+    def move_artist(self) -> None:
+        artist = self.detail.artist
+        if artist is None:
+            return
+        target = (
+            CollectionKind.IMAGES
+            if artist.collection_kind == CollectionKind.VIDEOS
+            else CollectionKind.VIDEOS
+        )
+        target_label = self._collection_label(target)
+        source_label = self._collection_label(artist.collection_kind)
+        answer = QMessageBox.question(
+            self,
+            f"Move to {target_label}",
+            f"Move {artist.name} from {source_label} to {target_label}?\n\n"
+            "Rating history, tags and metadata will be preserved.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel,
+            QMessageBox.StandardButton.Yes,
+        )
+        if answer != QMessageBox.StandardButton.Yes:
+            return
+        try:
+            with self.database.session() as session:
+                ArtistRepository(session).move_to_collection(artist.id, target)
+        except Exception as exc:
+            if isinstance(exc, DuplicateArtistError):
+                QMessageBox.warning(
+                    self,
+                    "Name already exists",
+                    f"An artist named '{artist.name}' already exists in {target_label}.\n"
+                    "Rename the artist before moving or remove the duplicate.",
+                )
+                return
+            self._error("Artist could not be moved", exc)
+            return
+        self._selected_artist_id = None
+        self.reload()
+        self.statusBar().showMessage(f"Moved {artist.name} to {target_label}", 4000)
 
     def trash_artist(self) -> None:
         artist = self.detail.artist

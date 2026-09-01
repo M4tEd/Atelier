@@ -216,6 +216,10 @@ class ArtistStore:
                 folder_path=str(values.get("folder_path") or "") or None,
             )
 
+    def move_artist(self, artist_id: int, target_collection: CollectionKind) -> None:
+        with self.database.session() as session:
+            ArtistRepository(session).move_to_collection(artist_id, target_collection)
+
     def trash(self, artist_id: int) -> None:
         with self.database.session() as session:
             ArtistRepository(session).trash(artist_id)
