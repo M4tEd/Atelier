@@ -451,7 +451,7 @@ class MainWindow(QMainWindow):
         if dialog.exec() != dialog.DialogCode.Accepted:
             return
         update_date, sentiment, reason = dialog.values()
-        delta = 1 if sentiment == "good" else -1
+        delta = {"good": 1, "bad": -1, "mid": 0}.get(sentiment, 0)
         decision = self._threshold_decision(artist, artist.points + delta)
         if decision == "cancel":
             return
