@@ -23,7 +23,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
 )
 
-from collection_manager.constants import Tier
+from collection_manager.constants import TIER_ASCENDING, Tier
 from collection_manager.domain import RuleSuggestion
 from collection_manager.ui.tag_text import parse_tag_text
 
@@ -47,6 +47,7 @@ class AddArtistDialog(QDialog):
         form.addRow("Name", self.name_edit)
         form.addRow("Starting tier", self.tier_combo)
         form.addRow("Tags", self.tags_edit)
+        self._form = form
         layout.addLayout(form)
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
@@ -54,24 +55,41 @@ class AddArtistDialog(QDialog):
         buttons.accepted.connect(self._accept_if_valid)
         buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
+        self.tier_combo.currentIndexChanged.connect(self._refresh_tags_visibility)
+        self._refresh_tags_visibility()
         self.name_edit.setFocus()
+
+    def _tags_applicable(self) -> bool:
+        tier = self.tier_combo.currentData()
+        if tier is None:
+            return False
+        return TIER_ASCENDING.index(tier) >= TIER_ASCENDING.index(Tier.BANGERS)
+
+    def _refresh_tags_visibility(self) -> None:
+        visible = self._tags_applicable()
+        self.tags_edit.setVisible(visible)
+        label = self._form.labelForField(self.tags_edit)
+        if label is not None:
+            label.setVisible(visible)
+        self.adjustSize()
 
     def _accept_if_valid(self) -> None:
         if not self.name_edit.text().strip():
             QMessageBox.warning(self, "Name required", "Enter the artist's canonical name.")
             return
-        try:
-            parse_tag_text(self.tags_edit.text())
-        except ValueError as exc:
-            QMessageBox.warning(self, "Invalid tags", str(exc))
-            return
+        if self._tags_applicable():
+            try:
+                parse_tag_text(self.tags_edit.text())
+            except ValueError as exc:
+                QMessageBox.warning(self, "Invalid tags", str(exc))
+                return
         self.accept()
 
     def values(self) -> dict[str, object]:
         return {
             "name": self.name_edit.text(),
             "tier": self.tier_combo.currentData(),
-            "tags": parse_tag_text(self.tags_edit.text()),
+            "tags": parse_tag_text(self.tags_edit.text()) if self._tags_applicable() else [],
             "date_added": date.today(),
         }
 
