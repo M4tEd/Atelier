@@ -7,7 +7,8 @@ from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
 
-from PySide6.QtCore import QObject, QSettings, Signal
+from PySide6.QtCore import QMimeData, QObject, QPoint, QSettings, Qt, QUrl, Signal
+from PySide6.QtGui import QDragEnterEvent, QDropEvent
 
 from collection_manager.constants import (
     CollectionKind,
@@ -313,6 +314,65 @@ def test_artist_and_typed_path_changes_invalidate_stale_results(
     assert "Calculate size" in panel.folder_scan_status_text
     assert panel.shutdown_folder_scans(123)
     assert controller.shutdown_calls == [123]
+
+
+def test_dropped_folder_applies_path_and_starts_scan(qtbot, tmp_path: Path) -> None:  # noqa: ANN001
+    controller = FakeFolderScanController()
+    panel = ArtistDetailPanel(tmp_path, folder_scan_controller=controller)
+    qtbot.addWidget(panel)
+    panel.set_artist(_artist(9))
+    dropped = tmp_path / "dropped"
+    dropped.mkdir()
+
+    mime = QMimeData()
+    mime.setUrls([QUrl.fromLocalFile(str(dropped))])
+    enter = QDragEnterEvent(
+        QPoint(5, 5), Qt.DropAction.CopyAction, mime, Qt.MouseButton.LeftButton,
+        Qt.KeyboardModifier.NoModifier,
+    )
+    panel.folder_edit.dragEnterEvent(enter)
+    assert enter.isAccepted()
+
+    drop = QDropEvent(
+        QPoint(5, 5), Qt.DropAction.CopyAction, mime, Qt.MouseButton.LeftButton,
+        Qt.KeyboardModifier.NoModifier,
+    )
+    panel.folder_edit.dropEvent(drop)
+
+    assert drop.isAccepted()
+    assert panel.folder_edit.text() == str(dropped)
+    assert panel.active_folder_scan_id is not None
+    assert controller.starts[-1][1] == str(dropped.resolve())
+    assert controller.starts[-1][2] == 9
+
+
+def test_dropped_file_is_ignored(qtbot, tmp_path: Path) -> None:  # noqa: ANN001
+    controller = FakeFolderScanController()
+    panel = ArtistDetailPanel(tmp_path, folder_scan_controller=controller)
+    qtbot.addWidget(panel)
+    panel.set_artist(_artist(10))
+    stray = tmp_path / "note.txt"
+    stray.write_text("not a folder")
+
+    mime = QMimeData()
+    mime.setUrls([QUrl.fromLocalFile(str(stray))])
+    enter = QDragEnterEvent(
+        QPoint(5, 5), Qt.DropAction.CopyAction, mime, Qt.MouseButton.LeftButton,
+        Qt.KeyboardModifier.NoModifier,
+    )
+    panel.folder_edit.dragEnterEvent(enter)
+    assert not enter.isAccepted()
+
+    drop = QDropEvent(
+        QPoint(5, 5), Qt.DropAction.CopyAction, mime, Qt.MouseButton.LeftButton,
+        Qt.KeyboardModifier.NoModifier,
+    )
+    panel.folder_edit.dropEvent(drop)
+
+    assert not drop.isAccepted()
+    assert panel.folder_edit.text() == ""
+    assert panel.active_folder_scan_id is None
+    assert controller.starts == []
 
 
 def test_main_window_close_shuts_down_folder_scans(qtbot, tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001

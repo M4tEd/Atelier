@@ -4,8 +4,8 @@ import os
 from datetime import date
 from pathlib import Path
 
-from PySide6.QtCore import QDate, QUrl, Signal
-from PySide6.QtGui import QDesktopServices
+from PySide6.QtCore import QDate, QMimeData, QUrl, Signal
+from PySide6.QtGui import QDesktopServices, QDragEnterEvent, QDragMoveEvent, QDropEvent
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
@@ -47,6 +47,48 @@ from collection_manager.ui.tag_text import format_tag_text, parse_tag_text
 
 def _to_qdate(value: date) -> QDate:
     return QDate(value.year, value.month, value.day)
+
+
+def _dropped_folder(mime_data: QMimeData | None) -> str | None:
+    """Return the first dropped local folder, if any."""
+    if mime_data is None or not mime_data.hasUrls():
+        return None
+    for url in mime_data.urls():
+        if url.isLocalFile():
+            candidate = Path(url.toLocalFile())
+            if candidate.is_dir():
+                return str(candidate)
+    return None
+
+
+class FolderDropLineEdit(QLineEdit):
+    """Path field that accepts a folder dropped from a file manager."""
+
+    folder_dropped = Signal(str)
+
+    def __init__(self, parent=None):  # noqa: ANN001
+        super().__init__(parent)
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, event: QDragEnterEvent) -> None:  # noqa: N802
+        if _dropped_folder(event.mimeData()) is not None:
+            event.acceptProposedAction()
+        else:
+            event.ignore()
+
+    def dragMoveEvent(self, event: QDragMoveEvent) -> None:  # noqa: N802
+        if _dropped_folder(event.mimeData()) is not None:
+            event.acceptProposedAction()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event: QDropEvent) -> None:  # noqa: N802
+        folder = _dropped_folder(event.mimeData())
+        if folder is None:
+            event.ignore()
+            return
+        event.acceptProposedAction()
+        self.folder_dropped.emit(folder)
 
 
 class OptionalDateField(QWidget):
@@ -222,9 +264,13 @@ class ArtistDetailPanel(QFrame):
         folder = QGroupBox("Local folder")
         folder_layout = QVBoxLayout(folder)
         folder_path_row = QHBoxLayout()
-        self.folder_edit = QLineEdit()
-        self.folder_edit.setPlaceholderText("Optional folder path")
+        self.folder_edit = FolderDropLineEdit()
+        self.folder_edit.setPlaceholderText("Optional folder path (or drop a folder here)")
+        self.folder_edit.setToolTip(
+            "Type a path, Browse, or drag a folder here from your file manager."
+        )
         self.folder_edit.textEdited.connect(self._folder_path_edited)
+        self.folder_edit.folder_dropped.connect(self._folder_dropped)
         self.browse_folder_button = QPushButton("Browse")
         self.browse_folder_button.clicked.connect(self._browse_folder)
         self.open_folder_button = QPushButton("Open")
@@ -472,6 +518,13 @@ class ArtistDetailPanel(QFrame):
         if selected:
             self.folder_edit.setText(selected)
             self._start_folder_scan(selected)
+
+    def _folder_dropped(self, folder: str) -> None:
+        artist = self._artist
+        if artist is None or artist.deleted_at is not None:
+            return
+        self.folder_edit.setText(folder)
+        self._start_folder_scan(folder)
 
     def _calculate_folder_size(self) -> None:
         self._start_folder_scan(self.folder_edit.text())
