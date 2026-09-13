@@ -17,7 +17,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QLineEdit,
     QMessageBox,
-    QPlainTextEdit,
     QSpinBox,
     QTableWidget,
     QTableWidgetItem,
@@ -83,6 +82,7 @@ class LogUpdateDialog(QDialog):
         self.setWindowTitle(f"Log update — {artist_name}")
         self.setMinimumWidth(430)
         layout = QVBoxLayout(self)
+        layout.setSpacing(10)
         explanation = QLabel(
             "Record the update date and your judgment. A good update is +1; a bad update is -1; a mid update is 0."
         )
@@ -90,19 +90,18 @@ class LogUpdateDialog(QDialog):
         explanation.setProperty("muted", True)
         layout.addWidget(explanation)
         form = QFormLayout()
+        form.setVerticalSpacing(10)
         self.date_edit = QDateEdit(QDate.currentDate())
         self.date_edit.setCalendarPopup(True)
         self.date_edit.setDisplayFormat("yyyy-MM-dd")
+        self.date_edit.setMinimumHeight(32)
         self.sentiment_combo = QComboBox()
+        self.sentiment_combo.setMinimumHeight(32)
         self.sentiment_combo.addItem("Good update (+1)", "good")
         self.sentiment_combo.addItem("Bad update (−1)", "bad")
         self.sentiment_combo.addItem("Mid update (0)", "mid")
-        self.reason_edit = QPlainTextEdit()
-        self.reason_edit.setPlaceholderText("What changed? (optional)")
-        self.reason_edit.setMaximumHeight(100)
         form.addRow("Update date", self.date_edit)
         form.addRow("Judgment", self.sentiment_combo)
-        form.addRow("Reason", self.reason_edit)
         layout.addLayout(form)
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
@@ -110,12 +109,15 @@ class LogUpdateDialog(QDialog):
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
+        # Never allow the dialog to shrink shorter than its contents, otherwise
+        # the button row can paint over the input rows on some styles/DPIs.
+        self.adjustSize()
+        self.setMinimumHeight(self.sizeHint().height())
 
-    def values(self) -> tuple[date, str, str]:
+    def values(self) -> tuple[date, str]:
         return (
             self.date_edit.date().toPython(),
             str(self.sentiment_combo.currentData()),
-            self.reason_edit.toPlainText().strip(),
         )
 
 

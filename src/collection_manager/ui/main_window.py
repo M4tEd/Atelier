@@ -450,7 +450,7 @@ class MainWindow(QMainWindow):
         dialog = LogUpdateDialog(artist.name, self)
         if dialog.exec() != dialog.DialogCode.Accepted:
             return
-        update_date, sentiment, reason = dialog.values()
+        update_date, sentiment = dialog.values()
         delta = {"good": 1, "bad": -1, "mid": 0}.get(sentiment, 0)
         decision = self._threshold_decision(artist, artist.points + delta)
         if decision == "cancel":
@@ -458,7 +458,7 @@ class MainWindow(QMainWindow):
         try:
 
             def apply_update(service: RatingService) -> None:
-                service.log_update(artist.id, update_date, sentiment, reason)
+                service.log_update(artist.id, update_date, sentiment)
                 if decision == "proceed":
                     service.approve_tier_shift(artist.id)
                 elif decision == "later":
